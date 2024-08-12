@@ -27,7 +27,7 @@ const (
 	APIHost         = "http://127.0.0.1:10002"
 	UserTokenURL    = APIHost + "/auth/user_token"
 	UserRegisterURL = APIHost + "/user/user_register"
-	SecretKey       = "openIM123"
+	SecretKey       = "owlIM123"
 	OperationID     = "1646445464564"
 )
 

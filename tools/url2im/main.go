@@ -61,7 +61,7 @@ func main() {
 	flag.StringVar(&conf.UserID, "userID", "openIM123456", "IM administrator's user ID")
 
 	// Secret for the IM configuration
-	flag.StringVar(&conf.Secret, "secret", "openIM123", "Secret for the IM configuration")
+	flag.StringVar(&conf.Secret, "secret", "owlIM123", "Secret for the IM configuration")
 
 	flag.Parse()
 	if !filepath.IsAbs(conf.TaskPath) {

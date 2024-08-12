@@ -16,11 +16,12 @@ package redis
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/openimsdk/protocol/sdkws"
 	"github.com/redis/go-redis/v9"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
-	"testing"
 )
 
 func Test_msgCache_SetMessagesToCache(t *testing.T) {
@@ -39,7 +40,7 @@ func Test_msgCache_SetMessagesToCache(t *testing.T) {
 		want    int
 		wantErr assert.ErrorAssertionFunc
 	}{
-		{"test1", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Username: "", Password: "openIM123", DB: 0})}, args{context.Background(),
+		{"test1", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Username: "", Password: "owlIM123", DB: 0})}, args{context.Background(),
 			"cid", []*sdkws.MsgData{{Seq: 1}, {Seq: 2}, {Seq: 3}}}, 3, assert.NoError},
 	}
 	for _, tt := range tests {
@@ -74,10 +75,10 @@ func Test_msgCache_GetMessagesBySeq(t *testing.T) {
 		wantFailedSeqs []int64
 		wantErr        assert.ErrorAssertionFunc
 	}{
-		{"test1", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Password: "openIM123", DB: 0})},
+		{"test1", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Password: "owlIM123", DB: 0})},
 			args{context.Background(), "cid", []int64{1, 2, 3}},
 			[]*sdkws.MsgData{{Seq: 1}, {Seq: 2}, {Seq: 3}}, failedSeq, assert.NoError},
-		{"test2", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Password: "openIM123", DB: 0})},
+		{"test2", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Password: "owlIM123", DB: 0})},
 			args{context.Background(), "cid", []int64{4, 5, 6}},
 			nil, []int64{4, 5, 6}, assert.NoError},
 	}
@@ -118,7 +119,7 @@ func Test_msgCache_DeleteMessagesFromCache(t *testing.T) {
 		args    args
 		wantErr assert.ErrorAssertionFunc
 	}{
-		{"test1", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Password: "openIM123"})},
+		{"test1", fields{rdb: redis.NewClient(&redis.Options{Addr: "localhost:16379", Password: "owlIM123"})},
 			args{context.Background(), "cid", []int64{1, 2, 3}}, assert.NoError},
 	}
 	for _, tt := range tests {

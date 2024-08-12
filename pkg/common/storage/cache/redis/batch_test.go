@@ -2,11 +2,12 @@ package redis
 
 import (
 	"context"
+	"testing"
+
 	"github.com/openimsdk/open-im-server/v3/pkg/common/config"
 	"github.com/openimsdk/open-im-server/v3/pkg/common/storage/database/mgo"
 	"github.com/openimsdk/tools/db/mongoutil"
 	"github.com/openimsdk/tools/db/redisutil"
-	"testing"
 )
 
 func TestName(t *testing.T) {
@@ -17,7 +18,7 @@ func TestName(t *testing.T) {
 	ctx := context.Background()
 	rdb, err := redisutil.NewRedisClient(ctx, (&config.Redis{
 		Address:  []string{"172.16.8.48:16379"},
-		Password: "openIM123",
+		Password: "owlIM123",
 		DB:       3,
 	}).Build())
 	if err != nil {
@@ -25,9 +26,9 @@ func TestName(t *testing.T) {
 	}
 	mgocli, err := mongoutil.NewMongoDB(ctx, (&config.Mongo{
 		Address:     []string{"172.16.8.48:37017"},
-		Database:    "openim_v3",
-		Username:    "openIM",
-		Password:    "openIM123",
+		Database:    "owlim_v1",
+		Username:    "owlIM",
+		Password:    "owlIM123",
 		MaxPoolSize: 100,
 		MaxRetry:    1,
 	}).Build())

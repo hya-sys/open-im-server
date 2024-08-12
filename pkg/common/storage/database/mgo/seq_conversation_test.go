@@ -2,10 +2,11 @@ package mgo
 
 import (
 	"context"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 	"testing"
 	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func Result[V any](val V, err error) V {
@@ -19,9 +20,9 @@ func Mongodb() *mongo.Database {
 	return Result(
 		mongo.Connect(context.Background(),
 			options.Client().
-				ApplyURI("mongodb://openIM:openIM123@172.16.8.48:37017/openim_v3?maxPoolSize=100").
+				ApplyURI("mongodb://owlIM:owlIM123@172.16.8.48:37017/owlim_v1?maxPoolSize=100").
 				SetConnectTimeout(5*time.Second)),
-	).Database("openim_v3")
+	).Database("owlim_v1")
 }
 
 func TestUserSeq(t *testing.T) {

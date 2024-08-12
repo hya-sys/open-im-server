@@ -1,9 +1,9 @@
 global:
   resolve_timeout: 5m
-  smtp_from: alert@openim.io
-  smtp_smarthost: smtp.163.com:465
-  smtp_auth_username: alert@openim.io
-  smtp_auth_password: YOURAUTHPASSWORD
+  smtp_from: ilovecoding@foxmail.com
+  smtp_smarthost: smtp.qq.com:465
+  smtp_auth_username: ilovecoding@foxmail.com
+  smtp_auth_password: eikouweczjonebcf
   smtp_require_tls: false
   smtp_hello: xxx
 
@@ -28,7 +28,7 @@ route:
 receivers:
   - name: email
     email_configs:
-      - to: 'alert@example.com'
+      - to: 'ilovecoding@foxmail.com'
         html: '{{ template "email.to.html" . }}'
         headers: { Subject: "[OPENIM-SERVER]Alarm" }
         send_resolved: true

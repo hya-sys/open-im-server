@@ -2,6 +2,11 @@ package mgo
 
 import (
 	"context"
+	"math/rand"
+	"strconv"
+	"testing"
+	"time"
+
 	"github.com/openimsdk/open-im-server/v3/pkg/common/storage/model"
 	"github.com/openimsdk/protocol/msg"
 	"github.com/openimsdk/protocol/sdkws"
@@ -9,19 +14,15 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"math/rand"
-	"strconv"
-	"testing"
-	"time"
 )
 
 func TestName1(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*300)
 	defer cancel()
-	cli := Result(mongo.Connect(ctx, options.Client().ApplyURI("mongodb://openIM:openIM123@172.16.8.48:37017/openim_v3?maxPoolSize=100").SetConnectTimeout(5*time.Second)))
+	cli := Result(mongo.Connect(ctx, options.Client().ApplyURI("mongodb://owlIM:owlIM123@172.16.8.48:37017/owlim_v1?maxPoolSize=100").SetConnectTimeout(5*time.Second)))
 
 	v := &MsgMgo{
-		coll: cli.Database("openim_v3").Collection("msg3"),
+		coll: cli.Database("owlim_v1").Collection("msg3"),
 	}
 
 	req := &msg.SearchMessageReq{
@@ -50,10 +51,10 @@ func TestName1(t *testing.T) {
 func TestName10(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
-	cli := Result(mongo.Connect(ctx, options.Client().ApplyURI("mongodb://openIM:openIM123@172.16.8.48:37017/openim_v3?maxPoolSize=100").SetConnectTimeout(5*time.Second)))
+	cli := Result(mongo.Connect(ctx, options.Client().ApplyURI("mongodb://owlIM:owlIM123@172.16.8.48:37017/owlim_v1?maxPoolSize=100").SetConnectTimeout(5*time.Second)))
 
 	v := &MsgMgo{
-		coll: cli.Database("openim_v3").Collection("msg3"),
+		coll: cli.Database("owlim_v1").Collection("msg3"),
 	}
 	opt := options.Find().SetLimit(1000)
 
