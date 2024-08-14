@@ -14,9 +14,9 @@ prometheus:
 
 maxConcurrentWorkers: 3
 #"Use geTui for offline push notifications, or choose fcm or jpns; corresponding configuration settings must be specified."
-enable: "fcm"
+enable: "jpns"
 geTui:
-  pushUrl: "https://restapi.getui.com/v2/$appId"
+  pushUrl: ""
   masterSecret: ''
   appKey: ''
   intent: ''
@@ -24,12 +24,12 @@ geTui:
   channelName: ''
 fcm:
   # Prioritize using file paths. If the file path is empty, use URL
-  filePath: "fcm.json"  # File path is concatenated with the parameters passed in through - c(`mage` default pass in `config/`) and filePath. 
+  filePath: ""  # File path is concatenated with the parameters passed in through - c(`mage` default pass in `config/`) and filePath. 
   authURL: ""  #  Must start with https or http.
 jpns:
-  appKey: ''
-  masterSecret: ''
-  pushURL: ''
+  appKey: 'b5e01c1e6358bcb82fe974a1'
+  masterSecret: '112c6babdf9592036e64967d'
+  pushURL: 'https://api.jpush.cn/v3/push'
   pushIntent: ''
 
 # iOS system push sound and badge count
