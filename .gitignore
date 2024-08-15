@@ -36,6 +36,7 @@ deployments/charts/generated-configs/
 config/config.yaml
 config/notification.yaml
 config/fcm.json
+mongodb-keyfile
 
 ### OpenIM deploy ###
 deployments/openim-server/charts

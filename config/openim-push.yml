@@ -14,7 +14,7 @@ prometheus:
 
 maxConcurrentWorkers: 3
 #"Use geTui for offline push notifications, or choose fcm or jpns; corresponding configuration settings must be specified."
-enable: "jpns"
+enable: "jpush"
 geTui:
   pushUrl: ""
   masterSecret: ''

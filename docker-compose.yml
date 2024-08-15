@@ -10,8 +10,9 @@ services:
     ports:
       - "37017:27017"
     container_name: mongo
-    command: ["/bin/bash", "-c", "/docker-entrypoint-initdb.d/mongo-init.sh; docker-entrypoint.sh mongod --wiredTigerCacheSizeGB 1 --auth"]
+    command: ["/bin/bash", "-c", "/docker-entrypoint-initdb.d/mongo-init.sh; docker-entrypoint.sh mongod --wiredTigerCacheSizeGB 1 --auth --replSet rs0 --keyFile /data/configdb/mongodb-keyfile"]
     volumes:
+      - "./mongodb-keyfile:/data/configdb/mongodb-keyfile"
       - "${DATA_DIR}/components/mongodb/data/db:/data/db"
       - "${DATA_DIR}/components/mongodb/data/logs:/data/logs"
       - "${DATA_DIR}/components/mongodb/data/conf:/etc/mongo"
@@ -24,6 +25,7 @@ services:
       - MONGO_INITDB_DATABASE=owlim_v1
       - MONGO_OPENIM_USERNAME=owlIM
       - MONGO_OPENIM_PASSWORD=owlIM123
+      - MONGO_OPENIM_VERSION=v1
     restart: always
     networks:
       - openim
