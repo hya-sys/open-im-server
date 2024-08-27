@@ -14,5 +14,5 @@ prometheus:
 
 tokenPolicy:
   # Token validity period, in days
-  expire: 90
+  expire: 120
 

@@ -27,9 +27,9 @@ import (
 )
 
 func (s *friendServer) GetPaginationBlacks(ctx context.Context, req *relation.GetPaginationBlacksReq) (resp *relation.GetPaginationBlacksResp, err error) {
-	if err := s.userRpcClient.Access(ctx, req.UserID); err != nil {
-		return nil, err
-	}
+	// if err := s.userRpcClient.Access(ctx, req.UserID); err != nil {
+	// 	return nil, err
+	// }
 	total, blacks, err := s.blackDatabase.FindOwnerBlacks(ctx, req.UserID, req.Pagination)
 	if err != nil {
 		return nil, err

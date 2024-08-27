@@ -1,8 +1,8 @@
-url: "webhook://127.0.0.1:10008/callbackExample"
+url: "webhook://127.0.0.1:10008/callback/open_im"
 beforeSendSingleMsg:
-  enable: false
+  enable: true
   timeout: 5
-  failedContinue: true
+  failedContinue: false
 beforeUpdateUserInfoEx:
   enable:  false
   timeout: 5
