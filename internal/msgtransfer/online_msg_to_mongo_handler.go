@@ -16,7 +16,6 @@ package msgtransfer
 
 import (
 	"context"
-
 	"github.com/IBM/sarama"
 	"github.com/openimsdk/open-im-server/v3/pkg/common/config"
 	"github.com/openimsdk/open-im-server/v3/pkg/common/prommetrics"
@@ -91,13 +90,13 @@ func (mc *OnlineHistoryMongoConsumerHandler) handleChatWs2Mongo(ctx context.Cont
 	}
 }
 
-func (OnlineHistoryMongoConsumerHandler) Setup(_ sarama.ConsumerGroupSession) error   { return nil }
-func (OnlineHistoryMongoConsumerHandler) Cleanup(_ sarama.ConsumerGroupSession) error { return nil }
+func (*OnlineHistoryMongoConsumerHandler) Setup(_ sarama.ConsumerGroupSession) error   { return nil }
+func (*OnlineHistoryMongoConsumerHandler) Cleanup(_ sarama.ConsumerGroupSession) error { return nil }
 
 func (mc *OnlineHistoryMongoConsumerHandler) ConsumeClaim(
 	sess sarama.ConsumerGroupSession,
 	claim sarama.ConsumerGroupClaim,
-) error { // a instance in the consumer group
+) error { // an instance in the consumer group
 	log.ZDebug(context.Background(), "online new session msg come", "highWaterMarkOffset",
 		claim.HighWaterMarkOffset(), "topic", claim.Topic(), "partition", claim.Partition())
 	for msg := range claim.Messages() {

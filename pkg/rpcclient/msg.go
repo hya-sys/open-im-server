@@ -159,6 +159,15 @@ func (m *MessageRpcClient) SendMsg(ctx context.Context, req *msg.SendMsgReq) (*m
 	return resp, nil
 }
 
+// SetUserConversationsMinSeq set min seq
+func (m *MessageRpcClient) SetUserConversationsMinSeq(ctx context.Context, req *msg.SetUserConversationsMinSeqReq) (*msg.SetUserConversationsMinSeqResp, error) {
+	resp, err := m.Client.SetUserConversationsMinSeq(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 // GetMaxSeq retrieves the maximum sequence number from the gRPC client.
 // Errors during the gRPC call are wrapped to provide additional context.
 func (m *MessageRpcClient) GetMaxSeq(ctx context.Context, req *sdkws.GetMaxSeqReq) (*sdkws.GetMaxSeqResp, error) {
@@ -174,6 +183,9 @@ func (m *MessageRpcClient) GetMaxSeqs(ctx context.Context, conversationIDs []str
 	resp, err := m.Client.GetMaxSeqs(ctx, &msg.GetMaxSeqsReq{
 		ConversationIDs: conversationIDs,
 	})
+	if err != nil {
+		return nil, err
+	}
 	return resp.MaxSeqs, err
 }
 
@@ -182,6 +194,9 @@ func (m *MessageRpcClient) GetHasReadSeqs(ctx context.Context, userID string, co
 		UserID:          userID,
 		ConversationIDs: conversationIDs,
 	})
+	if err != nil {
+		return nil, err
+	}
 	return resp.MaxSeqs, err
 }
 
@@ -190,6 +205,9 @@ func (m *MessageRpcClient) GetMsgByConversationIDs(ctx context.Context, docIDs [
 		ConversationIDs: docIDs,
 		MaxSeqs:         seqs,
 	})
+	if err != nil {
+		return nil, err
+	}
 	return resp.MsgDatas, err
 }
 
@@ -337,7 +355,9 @@ func (s *NotificationSender) send(ctx context.Context, sendID, recvID string, co
 }
 
 func (s *NotificationSender) NotificationWithSessionType(ctx context.Context, sendID, recvID string, contentType, sessionType int32, m proto.Message, opts ...NotificationOptions) {
-	s.queue.Push(func() { s.send(ctx, sendID, recvID, contentType, sessionType, m, opts...) })
+	if err := s.queue.Push(func() { s.send(ctx, sendID, recvID, contentType, sessionType, m, opts...) }); err != nil {
+		log.ZWarn(ctx, "Push to queue failed", err, "sendID", sendID, "recvID", recvID, "msg", jsonutil.StructToJsonString(m))
+	}
 }
 
 func (s *NotificationSender) Notification(ctx context.Context, sendID, recvID string, contentType int32, m proto.Message, opts ...NotificationOptions) {
