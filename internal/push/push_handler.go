@@ -91,9 +91,9 @@ func (c *ConsumerHandler) handleMs2PsChat(ctx context.Context, msg []byte) {
 	}
 	sec := msgFromMQ.MsgData.SendTime / 1000
 	nowSec := timeutil.GetCurrentTimestampBySecond()
-	log.ZDebug(ctx, "push msg", "msg", pbData.String(), "sec", sec, "nowSec", nowSec)
+
 	if nowSec-sec > 10 {
-		return
+		log.ZWarn(ctx, "long time push msg", nil, "msg", pbData.String(), "sec", sec, "nowSec", nowSec, "nowSec-sec", nowSec-sec)
 	}
 	var err error
 	switch msgFromMQ.MsgData.SessionType {
@@ -154,17 +154,17 @@ func (c *ConsumerHandler) Push2User(ctx context.Context, userIDs []string, msg *
 			return nil
 		}
 	}
-	offlinePUshUserID := []string{msg.RecvID}
+	offlinePushUserID := []string{msg.RecvID}
 
 	//receiver offline push
 	if err = c.webhookBeforeOfflinePush(ctx, &c.config.WebhooksConfig.BeforeOfflinePush,
-		offlinePUshUserID, msg, nil); err != nil {
+		offlinePushUserID, msg, nil); err != nil {
 		return err
 	}
 
-	err = c.offlinePushMsg(ctx, msg, offlinePUshUserID)
+	err = c.offlinePushMsg(ctx, msg, offlinePushUserID)
 	if err != nil {
-		log.ZWarn(ctx, "offlinePushMsg failed", err, "offlinePUshUserID", offlinePUshUserID, "msg", msg)
+		log.ZWarn(ctx, "offlinePushMsg failed", err, "offlinePushUserID", offlinePushUserID, "msg", msg)
 		return nil
 	}
 
