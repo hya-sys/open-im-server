@@ -10,4 +10,4 @@ prometheus:
   # Prometheus listening ports, must match the number of api.ports
   ports: [ 20113 ]
   # This address can be accessed via a browser
-  grafanaURL: http://16.162.220.76:13000/
+  grafanaURL: http://43.198.43.133:13000/

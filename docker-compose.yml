@@ -10,9 +10,9 @@ services:
     ports:
       - "37017:27017"
     container_name: mongo
-    command: ["/bin/bash", "-c", "/docker-entrypoint-initdb.d/mongo-init.sh; docker-entrypoint.sh mongod --wiredTigerCacheSizeGB 1 --auth --replSet rs0 --keyFile /data/configdb/mongodb-keyfile"]
+    command: [ "/bin/bash", "-c", "/docker-entrypoint-initdb.d/mongo-init.sh; docker-entrypoint.sh mongod --wiredTigerCacheSizeGB 1 --auth --replSet rs0 --keyFile /data/configdb/mongodb.key" ]
     volumes:
-      - "./mongodb-keyfile:/data/configdb/mongodb-keyfile"
+      - "./mongodb.key:/data/configdb/mongodb.key"
       - "${DATA_DIR}/components/mongodb/data/db:/data/db"
       - "${DATA_DIR}/components/mongodb/data/logs:/data/logs"
       - "${DATA_DIR}/components/mongodb/data/conf:/etc/mongo"
@@ -105,7 +105,6 @@ services:
     networks:
       - openim
 
-
   minio:
     image: "${MINIO_IMAGE}"
     ports:
@@ -188,5 +187,3 @@ services:
       - ${DATA_DIR:-./}/components/grafana:/var/lib/grafana
     networks:
       - openim
-
-

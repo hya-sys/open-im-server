@@ -8,7 +8,7 @@ global:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets: ['16.162.220.76:19093']
+        - targets: ['43.198.43.133:19093']
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -25,59 +25,59 @@ scrape_configs:
   # prometheus fetches application services
   - job_name: 'node_exporter'
     static_configs:
-      - targets: [ '16.162.220.76:20114' ]
+      - targets: [ '43.198.43.133:20114' ]
   - job_name: 'openimserver-openim-api'
     static_configs:
-      - targets: [ '16.162.220.76:20113' ]
+      - targets: [ '43.198.43.133:20113' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-msggateway'
     static_configs:
-      - targets: [ '16.162.220.76:20112' ]
+      - targets: [ '43.198.43.133:20112' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-msgtransfer'
     static_configs:
-      - targets: [ '16.162.220.76:20111', '16.162.220.76:20110', '16.162.220.76:20109', '16.162.220.76:20108' ]
+      - targets: [ '43.198.43.133:20111', '43.198.43.133:20110', '43.198.43.133:20109', '43.198.43.133:20108' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-push'
     static_configs:
-      - targets: [ '16.162.220.76:20107' ]
+      - targets: [ '43.198.43.133:20107' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-auth'
     static_configs:
-      - targets: [ '16.162.220.76:20106' ]
+      - targets: [ '43.198.43.133:20106' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-conversation'
     static_configs:
-      - targets: [ '16.162.220.76:20105' ]
+      - targets: [ '43.198.43.133:20105' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-friend'
     static_configs:
-      - targets: [ '16.162.220.76:20104' ]
+      - targets: [ '43.198.43.133:20104' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-group'
     static_configs:
-      - targets: [ '16.162.220.76:20103' ]
+      - targets: [ '43.198.43.133:20103' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-msg'
     static_configs:
-      - targets: [ '16.162.220.76:20102' ]
+      - targets: [ '43.198.43.133:20102' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-third'
     static_configs:
-      - targets: [ '16.162.220.76:20101' ]
+      - targets: [ '43.198.43.133:20101' ]
         labels:
           namespace: 'default'
   - job_name: 'openimserver-openim-rpc-user'
     static_configs:
-      - targets: [ '16.162.220.76:20100' ]
+      - targets: [ '43.198.43.133:20100' ]
         labels:
           namespace: 'default'
